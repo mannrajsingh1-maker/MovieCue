@@ -1,5 +1,8 @@
 package com.moviereco.movie_recommender.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -13,7 +16,7 @@ public class Movie {
     @Column(unique = true)
     private String imdbId;
 
-    
+
     private String title;
 
     @Column(name = "release_year")
@@ -28,6 +31,9 @@ public class Movie {
     private String actors;
 
     private double imdbRating;
+
+    @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Rating> ratings;
 
     private String posterUrl;
 
@@ -44,6 +50,7 @@ public class Movie {
         this.director = director;
         this.actors = actors;
         this.imdbRating = imdbRating;
+        this.ratings = new ArrayList<>();
         this.posterUrl = posterUrl;
     }
 
@@ -102,6 +109,10 @@ public class Movie {
 
     public void setImdbRating(double imdbRating) {
         this.imdbRating = imdbRating;
+    }
+
+    public List<Rating> getRatings() {
+        return ratings;
     }
 
     public String getPosterUrl() {
