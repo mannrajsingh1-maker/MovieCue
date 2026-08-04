@@ -29,7 +29,7 @@ public class RatingService {
         Movie movie = movieRepository.findById(movieId)
                 .orElseThrow(() -> new NoSuchElementException("Movie not found with id: " + movieId));
 
-        Rating rating = new Rating(movieId, movie, score, LocalDate.now());
+        Rating rating = new Rating(movie, score, LocalDate.now());
         return ratingRepository.save(rating);
     }
 

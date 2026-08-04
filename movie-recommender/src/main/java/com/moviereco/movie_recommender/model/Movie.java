@@ -3,6 +3,8 @@ package com.moviereco.movie_recommender.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -33,6 +35,7 @@ public class Movie {
     private double imdbRating;
 
     @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private List<Rating> ratings;
 
     private String posterUrl;

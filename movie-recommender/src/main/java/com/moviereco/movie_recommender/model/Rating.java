@@ -3,6 +3,8 @@ package com.moviereco.movie_recommender.model;
 import jakarta.persistence.*;
 import java.time.*;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "Ratings")
 public class Rating {
@@ -13,6 +15,7 @@ public class Rating {
 
     @ManyToOne
     @JoinColumn(name = "movie_id")
+    @JsonBackReference
     private Movie movie;
 
     private double rating;
@@ -22,8 +25,7 @@ public class Rating {
         // blank constructor
     }
 
-    public Rating(Long id, Movie movie, double rating, LocalDate dateRated) {
-        this.id = id;
+    public Rating(Movie movie, double rating, LocalDate dateRated) {
         this.movie = movie;
         this.rating = rating;
         this.dateRated = dateRated;
