@@ -4,11 +4,14 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import org.springframework.stereotype.Service;
+
 import com.moviereco.movie_recommender.model.Movie;
 import com.moviereco.movie_recommender.model.Rating;
 import com.moviereco.movie_recommender.repository.MovieRepository;
 import com.moviereco.movie_recommender.repository.RatingRepository;
 
+@Service
 public class RatingService {
     private final RatingRepository ratingRepository;
     private final MovieRepository movieRepository;
