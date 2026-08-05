@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import com.moviereco.movie_recommender.service.OmdbService;
 
 
 
@@ -29,9 +30,11 @@ import org.springframework.http.ResponseEntity;
 @RequestMapping("/api/movies")
 public class MovieController {
     private final MovieService movieService;
+    private final OmdbService omdbService;
 
-    public MovieController(MovieService movieService) {
+    public MovieController(MovieService movieService, OmdbService omdbService) {
         this.movieService = movieService;
+        this.omdbService = omdbService;
     }
 
     @GetMapping
@@ -42,6 +45,12 @@ public class MovieController {
     @GetMapping("/{id}")
     public Movie getMovie(@PathVariable Long id) {
         return movieService.getMovieById(id);
+    }
+
+    @GetMapping("/search")
+    public Movie searchMovie(@RequestParam String title) {
+        Movie movie = omdbService.fetchMovieByTitle(title);
+        return movieService.saveMovie(movie);
     }
 
     @PostMapping
