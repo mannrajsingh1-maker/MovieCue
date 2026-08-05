@@ -1,16 +1,21 @@
 package com.moviereco.movie_recommender.service;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 
 import com.moviereco.movie_recommender.dto.OmdbMovieResponse;
 import com.moviereco.movie_recommender.model.Movie;
 
+@Service
 public class OmdbService {
     private final RestClient restClient;
     private final String apiKey;
 
-    public OmdbService(RestClient restClient, String apiKey) {
-        this.restClient = restClient;
+    public OmdbService(@Value("${omdb.api.key}") String apiKey) {
+        this.restClient = RestClient.builder()
+                .baseUrl("http://www.omdbapi.com/")
+                .build();
         this.apiKey = apiKey;
     }
 
@@ -34,12 +39,12 @@ public class OmdbService {
         movie.setTitle(dto.getTitle());
         movie.setGenre(dto.getGenre());
         movie.setDirector(dto.getDirector());
-        movie.setActors(dto.getActors());
         movie.setImdbId(dto.getImdbId());
+        movie.setActors(dto.getActors());;
         movie.setPosterUrl(dto.getPosterUrl());
 
         movie.setYear(parseIntSafely(dto.getYear()));
-        movie.setImdbRating(parseDoubleSafely(dto.getImdbId()));
+        movie.setImdbRating(parseDoubleSafely(dto.getImdbRating()));
         return movie;
     }
 

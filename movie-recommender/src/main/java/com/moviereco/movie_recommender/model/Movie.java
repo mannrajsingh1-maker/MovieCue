@@ -36,7 +36,7 @@ public class Movie {
 
     @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
-    private List<Rating> ratings;
+    private List<Rating> ratings = new ArrayList<>();
 
     private String posterUrl;
 

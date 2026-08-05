@@ -21,8 +21,11 @@ public class OmdbMovieResponse{
     @JsonProperty("Actors")
     private String actors;
 
+    @JsonProperty("imdbRating")
+    private String imdbRating;
+
     @JsonProperty("imdbID")
-    private String imdbId;
+    private String idmbId;
 
     @JsonProperty("Poster")
     private String posterUrl;
@@ -61,11 +64,17 @@ public class OmdbMovieResponse{
     public void setActors(String actors) {
         this.actors = actors;
     }
+    public String getImdbRating() {
+        return imdbRating;
+    }
+    public void setImdbRating(String imdbRating) {
+        this.imdbRating = imdbRating;
+    }
     public String getImdbId() {
-        return imdbId;
+        return idmbId;
     }
     public void setImdbId(String imdbId) {
-        this.imdbId = imdbId;
+        this.idmbId = imdbId;
     }
     public String getPosterUrl() {
         return posterUrl;
